@@ -30,5 +30,3 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
 export default Layout;
 
-//mongo password 5yl8ADdik1OnFVV6 user name kevinmaxmillan2014
-//mongodb+srv://kevinmaxmillan2014:5yl8ADdik1OnFVV6@cluster0.t0xw9mq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
