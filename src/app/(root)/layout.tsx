@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import AppSidebar from "@/components/shared/Sidebar";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
