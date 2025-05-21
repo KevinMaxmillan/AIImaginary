@@ -7,9 +7,10 @@ import { Webhook } from "svix";
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 
 export async function POST(req: Request) {
+  console.log("TRIGGER 1");
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
-  console.log("Webhook event 3");
+  
   if (!WEBHOOK_SECRET) {
     throw new Error(
       "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
   const svix_id = headerPayload.get("svix-id");
   const svix_timestamp = headerPayload.get("svix-timestamp");
   const svix_signature = headerPayload.get("svix-signature");
-  console.log("Webhook event 2");
+  
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
     return new Response("Error occured -- no svix headers", {
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
   const wh = new Webhook(WEBHOOK_SECRET);
 
   let evt: WebhookEvent;
-  console.log("Webhook event 1");
+  
 
   // Verify the payload with the headers
   try {
@@ -55,6 +56,7 @@ export async function POST(req: Request) {
 
   // Get the ID and type
   const { id } = evt.data;
+  console.log("TRIGGER");
   const eventType = evt.type;
 
   // CREATE
@@ -70,9 +72,9 @@ export async function POST(req: Request) {
       photo: image_url,
     };
 
-    console.log("Creating user with data:", user);
+   
     const newUser = await createUser(user);
-    console.log("User created:", newUser);
+   
 
     // Set public metadata
     if (newUser) {
